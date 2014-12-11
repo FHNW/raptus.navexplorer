@@ -33,7 +33,7 @@ raptus_navexplorer = {
         raptus_navexplorer.elements.navexplorer_tree = $('#navexplorer_tree');
 
         // Disabling text selection
-        raptus_navexplorer.elements.navexplorer_content.disableTextSelect();
+        raptus_navexplorer.elements.navexplorer_content.noSelect();
 
         // jstree
         $.jstree._themes = 'navexplorer_tree_themes/';

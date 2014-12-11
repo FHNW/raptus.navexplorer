@@ -1,14 +1,2 @@
-(function($) {
-    $.fn.disableTextSelect = function() {
-        return this.each(function(){
-            if($.browser.mozilla){//Firefox
-                $(this).css('MozUserSelect','none');
-            }else if($.browser.msie){//IE
-
-                $(this).bind('selectstart',function(){return false;});
-            }else{//Opera, etc.
-                $(this).mousedown(function(){return false;});
-            }
-        });
-    }
-})(jQuery);
+/*! http://mths.be/noselect v1.0.3 by @mathias */
+jQuery.fn.noSelect=function(){var a='none';return this.bind('selectstart dragstart mousedown',function(){return false}).css({MozUserSelect:a,msUserSelect:a,webkitUserSelect:a,userSelect:a})};

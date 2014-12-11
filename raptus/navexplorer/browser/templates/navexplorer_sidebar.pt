@@ -19,8 +19,8 @@
             <link href="navexplorer.css" media="screen" type="text/css" rel="stylesheet"
                   tal:attributes="href string:++resource++raptus.navexplorer.stylesheets/navexplorer_window.css"/>
 
-            <script type="text/javascript" src="/jquery.js"
-                    tal:attributes="src string:${portal_url}/jquery.js"></script>
+            <script type="text/javascript" src="jquery.js"
+                    tal:attributes="src string:${portal_url}/++resource++plone.app.jquery.js"></script>
             <script type="text/javascript" src="/plone_javascript_variables"
                     tal:attributes="src string:${portal_url}/plone_javascript_variables.js"></script>
 

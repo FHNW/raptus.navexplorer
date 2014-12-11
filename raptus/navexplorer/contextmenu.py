@@ -5,15 +5,12 @@ from zope.component import getMultiAdapter
 from Products.CMFPlone import PloneMessageFactory as _p
 from Products.CMFCore.utils import getToolByName
 
-from ordereddict import OrderedDict
+from collections import OrderedDict
 
 from raptus.navexplorer import _
 from raptus.navexplorer.interfaces import IContextMenu
 
-try:
-    from zope.browsermenu.menu import getMenu
-except ImportError: # Plone < 4.3
-    from zope.app.publisher.browser.menu import getMenu
+from zope.browsermenu.menu import getMenu
 
 try:
     import raptus.article.core

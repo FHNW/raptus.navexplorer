@@ -1,10 +1,10 @@
 Changelog
 =========
 
-1.8 (unreleased)
+2.0 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Plone 4.3 / Python 2.7 compatibility
 
 
 1.7 (2013-12-18)

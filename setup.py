@@ -12,9 +12,11 @@ setup(name='raptus.navexplorer',
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Framework :: Plone",
+        "Framework :: Plone :: 4.3",
         "Framework :: Zope2",
         "Framework :: Zope3",
         "Programming Language :: Python",
+        "Programming Language :: Python :: 2.7",
         ],
       keywords='plone navigation manage explore',
       author='Raptus AG',
@@ -27,7 +29,7 @@ setup(name='raptus.navexplorer',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'ordereddict'
+          'plone.app.jquery'
           # -*- Extra requirements: -*-
       ],
       entry_points="""
