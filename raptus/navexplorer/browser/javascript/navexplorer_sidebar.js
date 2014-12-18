@@ -6,10 +6,6 @@ raptus_navexplorer = {
                  hidden_expires: 300,
                  width_expires: 300,
                  standaloneWindow: 'width=400,height=800,toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,copyhistory=no,resizable=no',
-                 theme: { theme : 'raptus',
-                          dots : false,
-                          icons : true}
-                },
 
     elements : { navexplorer_content: undefined,
                  navexplorer_info: undefined,
@@ -32,29 +28,19 @@ raptus_navexplorer = {
         raptus_navexplorer.elements.navexplorer_info_error = $('#navexplorer_info_error');
         raptus_navexplorer.elements.navexplorer_tree = $('#navexplorer_tree');
 
-        // Disabling text selection
-        raptus_navexplorer.elements.navexplorer_content.noSelect();
-
         // jstree
-        $.jstree._themes = 'navexplorer_tree_themes/';
-
         var inst = raptus_navexplorer.treeinst = raptus_navexplorer.elements.navexplorer_tree;
         inst.jstree({
-            json_data: {
-                progressive_unload : true,
-                ajax: {
-                    url: portal_url + '/navexplorer_ajax',
-                    async_data: function () { return { "ts": new Date().getTime()} },
-                    cache: false,
-                    data: function(n){
-                        return {
-                            path: n.data ? n.data('path') : '',
-                        };
+
+            'core': {
+                'data': {
+                    'url': portal_url + '/navexplorer_ajax',
+                    'dataType' : "json",
+                    'data': function(node){
+                        return { 'id': node.id };
                     }
                 }
             },
-
-            themes: raptus_navexplorer.settings.theme,
 
             ui: { select_limit : -1,
                   select_multiple_modifier: 'alt',
@@ -69,15 +55,12 @@ raptus_navexplorer = {
                        'return': function(){ var o = this.data.ui.hovered || this.data.ui.last_selected;
                                                this.deselect_all();
                                                this.select_node(o)}},
-
             dnd: { drag_target: false,
                    drop_target: false,
                    check_timeout: 800,
             },
 
-            crrm: { move: { check_move: raptus_navexplorer.dndCheck } },
-
-            plugins: ['themes', 'json_data', 'crrm', 'dnd', 'ui', 'hotkeys', 'contextmenu', 'cookies']
+            plugins: ['dnd', 'ui', 'contextmenu', 'cookies']
 
         })
 

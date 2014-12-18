@@ -18,27 +18,31 @@ from Products.CMFCore.utils import getToolByName
 from raptus.navexplorer import config
 from raptus.navexplorer.interfaces import IContextMenu
 
+from plone.uuid.interfaces import IUUID
+from plone.app.uuid.utils import uuidToObject
 
 class AjaxView(BrowserView):
     """ generate json from plone content
     """
 
     def __call__(self):
+# XXX use plone.api
         pstate = getMultiAdapter((self.context, self.request), name='plone_portal_state')
         self.portal = portal = pstate.portal()
 
-        path = self.request.get('path', None)
-        if not path:
+        uuid = self.request.get('id', '')
+        if not uuid or uuid.strip() == '#':
             children = [self.build(obj) for obj in self.children(portal)]
             initdata = self.build(portal)
-            initdata.update(dict(children=children))
+            initdata.update({'children': children})
             return json.dumps(initdata)
 
-        node = portal.restrictedTraverse(path)
+        node = uuidToObject(uuid)
         children = [self.build(obj) for obj in self.children(node)]
         return json.dumps(children)
 
     def children(self, obj):
+        # XXX use contentlisting for this
         if not hasattr(aq_base(obj), 'contentValues'):
             return []
         ms_tool = getToolByName(self.context, 'portal_membership')
@@ -49,24 +53,16 @@ class AjaxView(BrowserView):
         return children
 
     def build(self, obj):
-        state = ''
+        result = {'text': self.title(obj),
+                 'icon': self.icon(obj),
+                 'id': self.id(obj)}
         if len(self.children(obj)):
-            state = 'closed'
-        return dict(data=dict(title=self.title(obj),
-                               icon=self.icon(obj),
-                               type=self.type(obj),
-                               defaultpage=self.defaultpage(obj)),
-                     state=state,
-                     attr=self.attr(obj),
-                     metadata=self.metadata(obj))
+            result['state'] = {'opened': False}
+            result['children'] = True
+        return result
 
     def title(self, obj):
-        title = None
-        if hasattr(obj, 'Title'):
-            title = obj.Title()
-        if not title:
-            title = obj.getId()
-        return title
+        return obj.title_or_id()
 
     def icon(self, obj):
         if callable(obj.icon):
@@ -93,7 +89,7 @@ class AjaxView(BrowserView):
         return False
 
     def id(self, obj):
-        return unicode(hash(obj.getPhysicalPath()))
+        return IUUID(obj, '')
 
     def attr(self, obj):
         return dict(id=self.id(obj))

@@ -19,6 +19,10 @@
             <link href="navexplorer.css" media="screen" type="text/css" rel="stylesheet"
                   tal:attributes="href string:++resource++raptus.navexplorer.stylesheets/navexplorer_window.css"/>
 
+
+                  <link rel="stylesheet" href="themes/default/style.min.css"
+                    tal:attributes="href string:++resource++raptus.navexplorer.javascript/themes/default/style.min.css"/>
+
             <script type="text/javascript" src="jquery.js"
                     tal:attributes="src string:${portal_url}/++resource++plone.app.jquery.js"></script>
             <script type="text/javascript" src="/plone_javascript_variables"
@@ -26,14 +30,10 @@
 
             <script type="text/javascript" src="/jquery.cookie.js"
                     tal:attributes="src string:++resource++raptus.navexplorer.javascript/jquery.cookie.js"></script>
-            <script type="text/javascript" src="/jquery.hotkeys.js"
-                    tal:attributes="src string:++resource++raptus.navexplorer.javascript/jquery.hotkeys.js"></script>
-            <script type="text/javascript" src="/jquery.jstree.js"
-                    tal:attributes="src string:++resource++raptus.navexplorer.javascript/jquery.jstree.js"></script>
-            <script type="text/javascript" src="/jquery.noselect.js"
-                    tal:attributes="src string:++resource++raptus.navexplorer.javascript/jquery.noselect.js"></script>
+            <script type="text/javascript" src="/jstree.js"
+                tal:attributes="src string:${portal_url}/++resource++raptus.navexplorer.javascript/jstree.js"></script>
             <script type="text/javascript" src="/jquery.urldecoder.js"
-                    tal:attributes="src string:++resource++raptus.navexplorer.javascript/jquery.urldecoder.js"></script>
+                tal:attributes="src string:++resource++raptus.navexplorer.javascript/jquery.urldecoder.js"></script>
             <script type="text/javascript" src="/raptus.navexplorer.js"
                     tal:attributes="src string:++resource++raptus.navexplorer.javascript/navexplorer_sidebar.js"></script>
         </head>
